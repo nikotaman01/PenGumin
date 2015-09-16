@@ -8,7 +8,7 @@
 
 </div>
 <div class="container">
-  <div class="achivement">
+  <div class="achievement">
     <h2>達成度</h2>
     <div class="achievement_graph row">
       <div class="goods col-md-3">
