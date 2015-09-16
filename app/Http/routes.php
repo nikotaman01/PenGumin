@@ -13,5 +13,7 @@
 
 Route::get('/', "TopController@index");
 Route::get('/mypage', "MyController@show");
+Route::get('/invite/index', "InviteController@index");
+
 
 #Route::controllers();
