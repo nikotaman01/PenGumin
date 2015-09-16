@@ -12,5 +12,6 @@
 */
 
 Route::get('/', "TopController@index");
+Route::get('/mypage', "MyController@show");
 
 #Route::controllers();
