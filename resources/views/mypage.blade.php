@@ -2,100 +2,170 @@
 
 @section('title', '楽天クエスト')
 
+<!--if (child) {}-->
 @section('body')
-
-<div class="main_picture">
-
-</div>
-<div class="container">
-  <div class="achievement">
-    <h2>達成度</h2>
-    <div class="achievement_graph row">
-      <div class="goods col-md-3">
-        <div class="goods_pic img-thumbnail">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg" class="img-responsive" alt="gumi">
-        </div>
-        <div class="change_goods text-center">
-          <button type="button" class="btn btn-default">Default</button>
-        </div>
-      </div>
-      <div class="progress_bar col-md-9">
-        <div class="progress">
-          <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-          </div>
-        </div>
-        <div class="percent panel">
-          <div class="panel-heading">
-            賞品獲得まで現在
-          </div>
-          <div class="panel-body">
-            77%
-          </div>
-        </div>
-        <div class="goods_point">
-          1000000pt
-        </div>
-        <div class="got_point">
-          3pt
-        </div>
-        <div class="remaining_point">
-          999997pt
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="quest_list table-responsive">
-    <div class="panel">
-      <div class="panel-heading">
-        <h2>クエストリスト</h2>
-      </div>
-      <div class="panel-body  panel panel-danger">
-        <table class="table table-hover">
-          <tr>
-            <td>
-              掃除
-            </td>
-            <td>
-              50pt
-            </td>
-            <td>
-              <button type="button" class="btn btn-danger">おわった！</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              手伝い
-            </td>
-            <td>
-              100pt
-            </td>
-            <td>
-              <button type="button" class="btn btn-danger">おわった！</button>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="history">
-    <div class="total_point">
-      <h3>今までの獲得ポイント</h3>
-    </div>
-    <div class="got_goods">
-      <h3>戦利品</h3>
-      <div class="got_goods_pictures img-thumbnail">
+<div class="achivement container text-center">
+  <h2>達成度</h2>
+  <div class="achievement_graph row">
+    <div class="goods col-md-3">
+      <div class="goods_pic img-thumbnail">
         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg" class="img-responsive" alt="gumi">
       </div>
+      <div class="change_goods">
+        <button type="button" class="btn btn-primary">賞品変更</button>
+      </div>
     </div>
-    <div class="past_quest">
-      過去のクエスト
+    <div class="progress_bar col-md-8">
+      <div class="progress">
+        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style="width: 77%">
+          77 %
+        </div>
+      </div>
+      <div class="percent panel panel-warning col-md-3">
+        <div class="panel-heading">
+          <h6>現在のステータス</h6>
+        </div>
+        <div class="panel-body">
+          <h4>77 %</h4>
+        </div>
+      </div>
+      <div class="goods_point panel panel-success col-md-3">
+        <div class="panel-heading">
+          <h6>賞品の必要ポイント</h6>
+        </div>
+        <div class="panel-body">
+          <h4>1000000 pt</h4>
+        </div>
+      </div>
+      <div class="got_point panel panel-info col-md-3">
+        <div class="panel-heading">
+          <h6>現在の獲得ポイント</h6>
+        </div>
+        <div class="panel-body">
+          <h4>3 pt</h4>
+        </div>
+      </div>
+      <div class="remaining_point panel panel-danger col-md-3">
+        <div class="panel-heading">
+          <h6>賞品獲得まであと</h6>
+        </div>
+        <div class="panel-body">
+          <h4>999997 pt</h4>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-@stop
+<br>
+
+<div class="quest_list container table-responsive">
+  <div class="panel panel-danger text-center">
+    <div class="panel-heading">
+      <h2>クエストリスト</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover text-center">
+        <tr>
+          <td>
+            <h4>掃除</h4>
+          </td>
+          <td>
+            <h4>50 pt</h4>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">おわった！</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4>手伝い</h4>
+          </td>
+          <td>
+            <h4>100 pt</h4>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">おわった！</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4>親孝行</h4>
+          </td>
+          <td>
+            <h4>999999999 pt</h4>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">おわった！</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="history container">
+  <h2>あしあと</h2>
+  <div class="total_point panel panel-dengar">
+    <h3>今までの総獲得ポイント: 117 pt</h3>
+  </div>
+  <br>
+  <div class="got_goods">
+    <h3>戦利品</h3>
+    <div class="got_goods_pictures img-thumbnail col-md-4 text-center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg" class="img-responsive" alt="gumi">
+      <div class="goods_name">
+        <h4>Haribo 6人衆</h4>
+      </div>
+      <div class="got_date">
+        <h4>2015/09/16</h4>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="past_quest col-md-12">
+    <h3>達成したクエスト</h3>
+      <table class="table table-striped text-center">
+        <tr>
+          <td>
+            <h4>かたたたき</h4>
+          </td>
+          <td>
+            <span class="badge"><h4>3 回</h4></span>
+          </td>
+          <td class="panel panel-info">
+            <h4>計 3 pt</h4>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4>排水口のぬめり取り</h4>
+          </td>
+          <td>
+            <span class="badge"><h4>14 回</h4></span>
+          </td>
+          <td class="panel panel-info">
+            <h4>計 14 pt</h4>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4>はじめてのおつかい</h4>
+          </td>
+          <td>
+            <span class="badge"><h4>14 回</h4></span>
+          </td>
+          <td class="panel panel-info">
+            <h4>計 100 pt</h4>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>
+@endsection
+
+<!--if (parent) {}-->
+
 
 @section('footer')
 
-@stop
+@endsection
