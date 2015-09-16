@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', "TopController@index");
-
+#Route::get('/', 'TopController@index');
+#Route::get('/', 'WelcomeController@index');
+#Route::get('contact', 'TopController@contact');
+Route::get('/about', 'myPageController@about');
 #Route::controllers();
