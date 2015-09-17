@@ -88,6 +88,16 @@ class MypageController extends Controller
         return redirect()->action('MypageController@index');
     }
 
+    public function accepte(Request $req, Quest $quest){
+        //対象のクエストID
+        $questId = $req->questId;
+
+        $questRecord = $quest->where("quest_id","=",$questId)->first();
+        $questRecord->completed_at = date("Y/m/d H:i:s");
+        $questRecord->save();
+        return redirect()->action('MypageController@index');
+    }
+
     public function cart(){
         return view('mypage/cart');
     }

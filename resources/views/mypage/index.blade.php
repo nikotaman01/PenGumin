@@ -165,9 +165,10 @@ $allQuestList = array(
             <td>
               <h4>{{$quest['point']}} クエストpt</h4>
             </td>
-            <form method="POST" action="{{action('MypageController@index', $quest['quest_id'])}}" accept-charset="UTF-8">
+            <form method="POST" action="{{action('MypageController@accept')}}" accept-charset="UTF-8">
               <td>
                 {!! csrf_field() !!}
+                <input type = "hidden" value = "{{$quest ['quest_id']}}" name = "questId">
                 <button type="submit" class="btn btn-danger">承認</button>
               </td>
             </form>
