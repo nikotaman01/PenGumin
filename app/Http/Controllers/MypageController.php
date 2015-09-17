@@ -9,6 +9,7 @@ use App\Member;
 use App\Quest;
 use Session;
 use App\Item;
+use DB;
 
 class MypageController extends Controller
 {
@@ -64,21 +65,16 @@ class MypageController extends Controller
     }
 
     public function done(Item $item){
-        // $login_user = Auth::user();
-        // $child = $login_user->getChild();
+        $login_user = Auth::user();
+        $child = $login_user->getChild();
 
-        // $child_member_id = $child->member_id;
+        $child_member_id = $child->member_id;
 
-        // $item_record = $item->where("member_id","=",$child_member_id)->where('did_get','=',"")->first();
-        // dd($item_record);
+        $item_record = $item->where("member_id","=",$child_member_id)->where('did_get','=',NULL)->first();
+        $item_record->did_get = date("Y/m/d H:i:s");
+        $item_record->save();
 
-        // // $item->where()
-
-        // //買うのは親
-        // $member = $req->user();
-        // //ダミーでセッションに登録
-        // Session::put('rakuten_point', 4000);
-
+        return redirect()->to('/mypage/cart');
 
     }
 
@@ -90,5 +86,9 @@ class MypageController extends Controller
         $questRecord->approved_at = date("Y/m/d H:i:s");
         $questRecord->save();
         return redirect()->action('MypageController@index');
+    }
+
+    public function cart(){
+        return view('mypage/cart');
     }
 }
