@@ -27,4 +27,4 @@ Route::get('/mypage', "MypageController@index");
 Route::get('/mypage/select', 'SelectController@index');
 Route::post('/mypage/select', 'SelectController@store');
 
-
+Route::post('/mypage/clear', 'MypageController@clear');

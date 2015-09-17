@@ -6,7 +6,7 @@
 //$isParent = false;
 $didAccept = true;
 //$gotPoint = 6191;
-$goodsPoint = 7777;
+//$goodsPoint = 1000;
 $totalPoint = 7000;
 $gotGoodsList = array(
   array(
@@ -84,13 +84,17 @@ $allQuestList = array(
         @endif
       </div>
       <div class="progressbar col-md-8">
-        <div class="progress">
-          <?php
-          $percent = round($gotPoint/$goodsPoint*100);
-          ?>
-          <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style="width: {{$percent}}%">
-          {{$percent}} %
+        @if ($goodsPoint == null)
+          <h4>賞品が選択されていません</h4>
+          <?php $percent = 0; ?>
+        @else
+          <div class="progress">
+            <?php $percent = round($gotPoint/$goodsPoint*100); ?>
+            <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style="width: {{$percent}}%">
+              {{$percent}} %
+            </div>
           </div>
+        @endif
         </div>
         <div class="status">
           <div class="percent panel panel-warning col-md-3">
@@ -98,7 +102,11 @@ $allQuestList = array(
               <h6>現在のステータス</h6>
             </div>
             <div class="panel-body">
+              @if ($goodsPoint == null)
+              <h4>--- %</h4>
+              @else
               <h4>{{$percent}} %</h4>
+              @endif
             </div>
           </div>
           <div class="goods-point panel panel-success col-md-3">
@@ -180,6 +188,28 @@ $allQuestList = array(
   @section('body')
   <div class="achivement container text-center">
     <h2>達成度</h2>
+    @if ($goodsPoint == null)
+    <div class="got-point panel panel-success col-md-6">
+      <div class="panel-heading">
+        <h2>目的の賞品をえらんでね！</h2>
+      </div>
+      <div class="panel-body">
+        <form method="GET" action="{{action('SelectController@index')}}" accept-charset="UTF-8">
+          <div class="change-goods">
+            <button type="submit" class="btn btn-primary">賞品選択</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="got-point panel panel-info col-md-6">
+      <div class="panel-heading">
+        <h3>現在の獲得ポイント</h3>
+      </div>
+      <div class="panel-body">
+        <h4>{{$gotPoint}} pt</h4>
+      </div>
+    </div>
+    @else
     <div class="achievement-graph row">
       <div class="goods col-md-3">
         <div class="goods-pic img-thumbnail">
@@ -187,8 +217,7 @@ $allQuestList = array(
         </div>
         <form method="GET" action="{{action('SelectController@index')}}" accept-charset="UTF-8">
           <div class="change-goods">
-            {!! csrf_field() !!}
-            <input type="submit" class="btn btn-primary" name="to_select" value="賞品変更">
+            <button type="submit" class="btn btn-primary">賞品変更</button>
           </div>
         </form>
       </div>
@@ -238,6 +267,7 @@ $allQuestList = array(
         </div>
       </div>
     </div>
+    @endif
   </div>
   <br>
 
