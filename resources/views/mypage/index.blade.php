@@ -147,8 +147,8 @@ $allQuestList = array(
         </div>
         @endif
         @if ($percent >= 100)
-        <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
-          <div class="buy col-md-3 col-md-offset-5">
+        <form method="POST" action="{{action('MypageController@done')}}" accept-charset="UTF-8">
+          <div class="buy col-md-3 col-md-offset-9">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-danger btn-lg">購入</button>
           </div>
@@ -296,9 +296,10 @@ $allQuestList = array(
             <td>
               <h4>{{$quest['point']}} クエストpt</h4>
             </td>
-            <form method="POST" action="{{action('MypageController@clear', $quest['quest_id'])}}" accept-charset="UTF-8">
+            <form method="POST" action="{{action('MypageController@clear')}}" accept-charset="UTF-8">
               <td>
                 {!! csrf_field() !!}
+                <input type="hidden" value="{{ $quest['quest_id'] }}" name="questId">
                 <button type="submit" class="btn btn-danger">おわった！</button>
               </td>
             </form>

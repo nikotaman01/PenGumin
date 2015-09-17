@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Member;
+use App\Quest;
+use Session;
+use App\Item;
 
 class MypageController extends Controller
 {
@@ -49,5 +54,32 @@ class MypageController extends Controller
         print "hoge";
 
         return view('select/index');
+    }
+
+    public function done(Item $item){
+        // $login_user = Auth::user();
+        // $child = $login_user->getChild();
+
+        // $child_member_id = $child->member_id;
+
+        // $item_record = $item->where("member_id","=",$child_member_id)->where('did_get','=',"")->first();
+        // dd($item_record);
+
+        // // $item->where()
+
+        // //買うのは親
+        // $member = $req->user();
+        // //ダミーでセッションに登録
+        // Session::put('rakuten_point', 4000);
+
+
+    }
+
+    public function clear(Request $req,Quest $quest){
+        //対象のクエストID
+        $questId = $req->questId;
+
+        //DBから探す
+        dd($quest->find($questId));
     }
 }
