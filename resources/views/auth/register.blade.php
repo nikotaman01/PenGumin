@@ -3,7 +3,6 @@
 @section('title', '楽天新規登録')
 
 @section('body')
-子
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         入力に誤りがあります。<br><br>
@@ -14,34 +13,29 @@
         </ul>
     </div>
 @endif
-<p>楽天新規登録</p>
-<form method="POST" action="/auth/register">
-    {!! csrf_field() !!}
-
-    <div>
-        ユーザー名
-        <input type="text" name="name" value="{{ old('name') }}">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p>楽天新規登録</p>
+            <form method="POST" action="/auth/register" >
+                {!! csrf_field() !!}
+                    <div class="input-group">
+                        <label>ユーザー名</label>
+                        <input type="text" name="name" value="{{ old('name') }}" class="form-element">
+                        <label>メールアドレス</label>
+                        <input type="email" name="email" value="{{ old('email') }}" class="form-element">
+                        <label>パスワード</label>
+                        <input type="password" name="password" class="form-element">
+                        <label>パスワード確認</label>
+                        <input type="password" name="password_confirmation" class="form-element">
+                        <button type="submit">登録</button>
+                    </div>
+            </form>
+        </div>
+        <div class="col-md-6"></div>
     </div>
+</div>
 
-    <div>
-        メールアドレス
-        <input type="email" name="email" value="{{ old('email') }}">
-    </div>
-
-    <div>
-        パスワード
-        <input type="password" name="password">
-    </div>
-
-    <div>
-        パスワード確認
-        <input type="password" name="password_confirmation">
-    </div>
-
-    <div>
-        <button type="submit">登録</button>
-    </div>
-</form>
-<a href="/auth/register">ログイン</a>
+<p>ログインは<a href="/auth/register">こちら</a></p>
 
 @stop

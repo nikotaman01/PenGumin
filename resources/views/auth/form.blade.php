@@ -3,7 +3,6 @@
 @section('title', '楽天新規登録')
 
 @section('body')
-子
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-heading">
