@@ -15,7 +15,7 @@ $API_NAME = "PenGumin";
 
 $count = 0;
 // 連想配列から値を取得
-if ($indata) {
+if(isset($indata)){
     $data = $indata['keyword'];
 
     // 検索数
@@ -94,7 +94,7 @@ if ($indata) {
               <td width="10%" align="center"><form action="#" method="post">
                 <input type="submit" class="btn btn-danger" name="decide" value="決定">
                 <input type="hidden" name="item_name" value="<?php echo $item['itemName'] ?>">
-                <input type="hidden" name="picure" value="<?php echo $item['mediumImageUrls'] ?>">
+                <input type="hidden" name="image" value="<?php echo $item['mediumImageUrls'][0]['imageUrl'] ?>">
                 <input type="hidden" name="price" value="<?php echo $item['itemPrice'] ?>">
                 <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
               </form></a></td>

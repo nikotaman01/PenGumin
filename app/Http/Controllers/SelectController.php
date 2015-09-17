@@ -87,20 +87,13 @@ class SelectController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump($request['ddata']);
-
-        if ($request['ddata']){
-
-            $itemData = $request['ddata'];
-            var_dump($itemData);
-
-            $results = DB::select('select * from items');
-            var_dump($results);
-
+        if ($request['item_name']){
+            // print $request['item_name'];
+            // print $request['price'];
+            // print $request['image'];
+            // $results = DB::select('select * from users');
         }
-        // reqはitem型
-        // item型の必要な値をデータベースに登録
-        return view('/mypage');
+        return view('/mypage/index');
     }
 
     /**

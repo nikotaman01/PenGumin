@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class MypageController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
         $member = Auth::user();
 
@@ -23,8 +23,21 @@ class MypageController extends Controller
             'totalPoint' => 100,
             'doneQuestList' => [],
             'allQuestList' => [],
-
         ];
-        return view('mypage/index',$data);
-    } 
+        return view('/mypage/index',$data);
+    }
+
+    public function select()
+    {
+        print "hoge";
+
+        return view('select/index');
+    }
+
+    public function show()
+    {
+
+        return view('/mypage/index');
+    }
+
 }

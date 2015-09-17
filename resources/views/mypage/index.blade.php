@@ -68,14 +68,14 @@ $allQuestList = array(
           <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg" class="img-responsive" alt="gumi">
         </div>
         @if ($didAccept)
-        <form method="POST" action="{{action('MyController@show')}}" accept-charset="UTF-8">
+        <form method="POST" action="{{action('MypageController@show')}}" accept-charset="UTF-8">
           <div class="accept-goods">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-warning">承認取消</button>
           </div>
         </form>
         @else
-        <form method="POST" action="{{action('MyController@show')}}" accept-charset="UTF-8">
+        <form method="POST" action="{{action('MypageController@show')}}" accept-charset="UTF-8">
           <div class="accept-goods">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-success">賞品承認</button>
@@ -128,7 +128,7 @@ $allQuestList = array(
           </div>
         </div>
         @if ($percent >= 100)
-        <form method="POST" action="{{action('MyController@show')}}" accept-charset="UTF-8">
+        <form method="POST" action="{{action('MypageController@show')}}" accept-charset="UTF-8">
           <div class="buy col-md-3 col-md-offset-9">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-danger btn-lg">購入</button>
@@ -155,7 +155,7 @@ $allQuestList = array(
             <td>
               <h4>{{$quest['point']}} pt</h4>
             </td>
-            <form method="POST" action="{{action('MyController@show', $quest['quest_id'])}}" accept-charset="UTF-8">
+            <form method="POST" action="{{action('MypageController@show', $quest['quest_id'])}}" accept-charset="UTF-8">
               <td>
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-danger">承認</button>
@@ -165,7 +165,7 @@ $allQuestList = array(
           @endforeach
         </table>
       </div>
-      <form method="POST" action="{{action('MyController@show')}}" accept-charset="UTF-8">
+      <form method="POST" action="{{action('MypageController@show')}}" accept-charset="UTF-8">
         <div class="quest-edit panel-footer text-center">
           {!! csrf_field() !!}
           <button type="submit" class="btn btn-info">クエストの追加・削除</button>
@@ -185,10 +185,10 @@ $allQuestList = array(
         <div class="goods-pic img-thumbnail">
           <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg" class="img-responsive" alt="gumi">
         </div>
-        <form method="POST" action="{{action('MyController@show')}}" accept-charset="UTF-8">
+        <form method="GET" action="{{action('SelectController@index')}}" accept-charset="UTF-8">
           <div class="change-goods">
             {!! csrf_field() !!}
-            <button type="button" class="btn btn-primary">賞品変更</button>
+            <input type="submit" class="btn btn-primary" name="to_select" value="賞品変更">
           </div>
         </form>
       </div>
@@ -256,7 +256,7 @@ $allQuestList = array(
             <td>
               <h4>{{$quest['point']}} pt</h4>
             </td>
-            <form method="POST" action="{{action('MyController@show', $quest['quest_id'])}}" accept-charset="UTF-8">
+            <form method="POST" action="{{action('MypageController@show', $quest['quest_id'])}}" accept-charset="UTF-8">
               <td>
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-danger">おわった！</button>
