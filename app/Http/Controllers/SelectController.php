@@ -96,17 +96,17 @@ class SelectController extends Controller
 
             //user_idの賞品選択済を確認
             $results = DB::select('select created_at from items where member_id = ?', [$id]);
-            var_dump($results);
 
             if(empty($results)){
                 //新規ならレコードの追加
-                DB::insert('insert into items (member_id, product_id, name, created_at, updated_at, price) values (?, ?, ?, ?, ?, ?)', [$id, $request['code'], $request['item_name'], date('Y-m-d'), date('Y-m-d'), $request['price'] ]);
+                DB::insert('insert into items (member_id, product_id, name, created_at, updated_at, price, picture) values (?, ?, ?, ?, ?, ?, ?)', [$id, $request['code'], $request['item_name'], date('Y-m-d'), date('Y-m-d'), $request['price'], $request['image']]);
             }else{
                 //存在するなら賞品を更新する
-                DB::update('update items set product_id = ?, name = ?, updated_at = ?, price = ?  where member_id = ?', [$id, $request['item_name'], date('Y-m-d'), $request['price'], $id]);
+                DB::update('update items set product_id = ?, name = ?, updated_at = ?, price = ?, picture = ?  where member_id = ?', [$id, $request['item_name'], date('Y-m-d'), $request['price'], $request['image'], $id]);
             }
         }
-        return view('/mypage/index');
+        //return view('/mypage/index');
+        return redirect()->action('MypageController@index');
     }
 
     /**
