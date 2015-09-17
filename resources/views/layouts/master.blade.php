@@ -5,7 +5,7 @@
       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
       <style type="text/css">
         .main-picture img {
-          width: 100%;
+          width: 75%;
         }
         body {
           background-color: #fffacd;
@@ -54,7 +54,7 @@
         </form>
       </div>
       <div class="main-picture">
-        <img src="http://www.fastpic.jp/images.php?file=1264951273.gif" class="img-responsive center-block" alt="logo">
+        <img src="http://www.fastpic.jp/images.php?file=9838842752.gif" class="img-responsive center-block" alt="logo">
       </div>
       <div class="container">
         @yield('body')
