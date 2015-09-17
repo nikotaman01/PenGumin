@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Member;
 use Validator;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -61,5 +63,17 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function form(Request $req){
+        return view("auth/form")->with('data',$req->all());
+    }
+
+    public function rakuten_register(Request $req){
+        //楽天登録処理
+    }
+
+    public function login(){
+        return view("auth/login");
     }
 }
