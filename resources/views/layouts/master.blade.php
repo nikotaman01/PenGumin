@@ -14,7 +14,28 @@
 
         }
         .header {
-          height: 20px;
+          margin: 0;
+          padding: 0;
+          position: fixed;
+          z-index: 100;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 40px;
+          color: white;
+          background-color: #DC143C;
+        }
+        .footer {
+          margin: 0;
+          padding: 0;
+          position: fixed;
+          z-index: 100;
+          bottom: 0px;
+          left: 0px;
+          width: 100%;
+          height: 30px;
+          color: white;
+          background-color: #DC143C;
         }
 
       </style>
@@ -26,19 +47,21 @@
         </title>
     </head>
     <body>
+      <div class="header">
         <h3>PenGumin           楽天クエスト</h3>
-        <form method="GET" action="{{action('Auth\AuthController@getLogout')}}" accept-charset="UTF-8" class="logout text-right">
-          <button type="submit" class="btn btn-danger">logout</button>
+        <form method="GET" action="{{action('Auth\AuthController@getLogout')}}" accept-charset="UTF-8" class="logout">
+          <button type="submit" class="btn btn-info">logout</button>
         </form>
+      </div>
       <div class="main-picture">
         <img src="http://www.fastpic.jp/images.php?file=1264951273.gif" class="img-responsive center-block" alt="logo">
       </div>
       <div class="container">
         @yield('body')
       </div>
+      <div class="footer">
+
+      </div>
     </body>
 
-    <div>
-      @yield('footer')
-    </div>
 </html>

@@ -9,6 +9,7 @@ $didAccept = true;
 //$goodsPoint = 1000;
 $totalPoint = 7000;
 $firstGet = false;
+$goodsPicture = "https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg";
 $gotGoodsList = array(
   array(
     'picture' => 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg',
@@ -44,17 +45,17 @@ $allQuestList = array(
   array(
     'title' => '親孝行',
     'point' => '9999',
-    'quest_id' => '1'
+    'quest_id' => '4'
   ),
   array(
       'title' => 'かたたたき',
       'point' => '1',
-      'quest_id' => '2'
+      'quest_id' => '5'
   ),
   array(
       'title' => '排水口のぬめり取り',
       'point' => '3',
-      'quest_id' => '3'
+      'quest_id' => '6'
   )
 );
 ?>
@@ -65,14 +66,14 @@ $allQuestList = array(
     <h2>達成度</h2>
     <div class="achievement-graph row">
       <div class="goods col-md-3">
-        <div class="goods-pic img-thumbnail">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg" class="img-responsive" alt="gumi">
+        @if ($goodsPoint == null)
+        <div class="goods-picture img-thumbnail">
+          <img src="{{$goodsPicture}}" class="img-responsive" alt="goods-picture">
         </div>
-        @if ($didAccept)
         <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
           <div class="accept-goods">
             {!! csrf_field() !!}
-            <button type="submit" class="btn btn-warning">承認取消</button>
+            <button type="submit" class="btn btn-warning">賞品選び直し</button>
           </div>
         </form>
         @else
@@ -98,7 +99,7 @@ $allQuestList = array(
         @endif
         </div>
         <div class="status">
-          <div class="percent panel panel-warning col-md-3">
+          <div class="percent panel panel-warning col-md-2">
             <div class="panel-heading">
               <h6>現在のステータス</h6>
             </div>
@@ -110,7 +111,7 @@ $allQuestList = array(
               @endif
             </div>
           </div>
-          <div class="goods-point panel panel-success col-md-3">
+          <div class="goods-point panel panel-success col-md-2">
             <div class="panel-heading">
               <h6>賞品の必要ポイント</h6>
             </div>
@@ -118,7 +119,7 @@ $allQuestList = array(
               <h4>{{$goodsPoint}} クエストpt</h4>
             </div>
           </div>
-          <div class="got-point panel panel-info col-md-3">
+          <div class="got-point panel panel-info col-md-2">
             <div class="panel-heading">
               <h6>現在の獲得ポイント</h6>
             </div>
@@ -126,7 +127,7 @@ $allQuestList = array(
               <h4>{{$gotPoint}} クエストpt</h4>
             </div>
           </div>
-          <div class="remaining-point panel panel-danger col-md-3">
+          <div class="remaining-point panel panel-danger col-md-2">
             <div class="panel-heading">
               <h6>賞品獲得まであと</h6>
             </div>
@@ -137,17 +138,17 @@ $allQuestList = array(
           </div>
         </div>
         @if ($firstGet)
-        <div class="rakuten-point col-md-3 col-md-offset-5">
+        <div class="rakuten-point col-md-3">
           <h4>あなたがお持ちの楽天ポイント<br>現在: 5000 pt</h4>
         </div>
         @else
-        <div class="rakuten-point col-md-3 col-md-offset-5">
+        <div class="rakuten-point col-md-3">
           <h4>あなたがお持ちの楽天ポイント<br>現在: 1000 pt</h4>
         </div>
         @endif
         @if ($percent >= 100)
         <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
-          <div class="buy col-md-3">
+          <div class="buy col-md-3 col-md-offset-5">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-danger btn-lg">購入</button>
           </div>
@@ -155,7 +156,6 @@ $allQuestList = array(
         @endif
       </div>
     </div>
-  </div>
   <br>
 
   <div class="quest-accept container table-responsive">
@@ -223,7 +223,7 @@ $allQuestList = array(
     <div class="achievement-graph row">
       <div class="goods col-md-3">
         <div class="goods-pic img-thumbnail">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg" class="img-responsive" alt="gumi">
+          <img src="{{$goodsPicture}}" class="img-responsive" alt="gumi">
         </div>
         <form method="GET" action="{{action('SelectController@index')}}" accept-charset="UTF-8">
           <div class="change-goods">
@@ -241,7 +241,7 @@ $allQuestList = array(
           </div>
         </div>
         <div class="status">
-          <div class="percent panel panel-warning col-md-3">
+          <div class="percent panel panel-warning col-md-2">
             <div class="panel-heading">
               <h6>現在のステータス</h6>
             </div>
@@ -249,7 +249,7 @@ $allQuestList = array(
               <h4>{{$percent}} %</h4>
             </div>
           </div>
-          <div class="goods-point panel panel-success col-md-3">
+          <div class="goods-point panel panel-success col-md-2">
             <div class="panel-heading">
               <h6>賞品の必要ポイント</h6>
             </div>
@@ -257,7 +257,7 @@ $allQuestList = array(
               <h4>{{$goodsPoint}} クエストpt</h4>
             </div>
           </div>
-          <div class="got-point panel panel-info col-md-3">
+          <div class="got-point panel panel-info col-md-2">
             <div class="panel-heading">
               <h6>現在の獲得ポイント</h6>
             </div>
@@ -265,7 +265,7 @@ $allQuestList = array(
               <h4>{{$gotPoint}} クエストpt</h4>
             </div>
           </div>
-          <div class="remaining-point panel panel-danger col-md-3">
+          <div class="remaining-point panel panel-danger col-md-2">
             <div class="panel-heading">
               <h6>賞品獲得まであと</h6>
             </div>
