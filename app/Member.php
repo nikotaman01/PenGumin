@@ -37,6 +37,11 @@ class Member extends Model implements AuthenticatableContract,
 		}
 	}	
 
+	public function getCurrentItem()
+	{
+		return $this->getChild()->items()->where('did_get', null)->first();
+	}
+
 	public function parentMember()
 	{	
 		return $this->belongsTo('App\Member', 'parent_id');
@@ -52,4 +57,8 @@ class Member extends Model implements AuthenticatableContract,
 		return $this->hasMany('App\Item');
 	}
 
+	public function quests()
+	{	
+		return $this->hasMany('App\Quest');
+	}
 }
