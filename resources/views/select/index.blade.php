@@ -1,23 +1,12 @@
-<?php
-// header("Content-type:text/html;charset=UTF-8");
-//mb_language('Japanese');
-/**
- * Short description for select.php
- *
- * @package select
- * @author matsumotoyasuyuki <matsumotoyasuyuki@matsumotoyasuyuki-no-MacBook-Air.local>
- * @version 0.1
- * @copyright (C) 2015 matsumotoyasuyuki <matsumotoyasuyuki@matsumotoyasuyuki-no-MacBook-Air.local>
- * @license MIT
- */
+@extends('layouts.master')
+@section('title', '賞品選択')
 
-$API_NAME = "PenGumin";
+<?php
 
 $count = 0;
 // 連想配列から値を取得
 if(isset($indata)){
     $data = $indata['keyword'];
-
     // 検索数
     $count = $data['count'];
     // 商品情報
@@ -25,92 +14,59 @@ if(isset($indata)){
 
     $word = $indata['word'];
     $kword = $word['keyword'];
-
-//      $keys = array_keys($data);
-//
-//  // 配列数分ループして、キーを取り出して表示する。
-//  Foreach ($keys as $key) {
-//      print $key . "\n";
-//  }
 }
-
-
 ?>
-
-<html lang="ja">
-<head>
-
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>賞品選択</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
+@section ('body')
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <h1 style="color: red;">賞品選択</h1>
-  <hr size="1" noshade><?php echo $API_NAME; ?><hr size="1" noshade>
+<br>
+<div class="search text-center">
+  <form action="#" method="GET">
+        <h3>欲しい賞品で検索しよう！</h3>
+        <br>
+        <input type="text" class="form-control input" placeholder="検索ワード" name="keyword" value="{{ Input::get('keyword')}}" size="30">
+        <br>
+        <input type="submit" class="btn btn-danger" value="検索">
+  </form>
+</div>
 
-  <form action="#" method="get">
-    <table width="60%" border="0" cellspacing="0" cellpadding="0" style="margin: 5px 0pt 0pt 0px;">
-      <tr>
-        <td>
-
-          <table width="80%" border=0 cellspacing=1 cellpadding=5 style="font-size: 12px;">
-            <tr>
-              <td>ほしい賞品</td>
-              <td>
-
-                <input type="text" class="form-control input" placeholder="Default input" name="keyword" value="{{ Input::get('keyword')}}" size="30">
-              </td>
-             <td>
-                <input type="submit" class="btn btn-danger" value="賞品を調べる">
-             </td>
-            </tr>
-          </table>
-
-        </td>
-      </tr>
-    </table>
-  </form>
-
-  <font style="font-size: 14px;">
-<?php if ($count > 0) : ?>
-見つかった件数: <?php echo number_format($count); ?>件<br>
-    <table width="70%" border="0" cellspacing="0" cellpadding="0" style="margin: 5px 0pt 0pt 0px;">
-      <tr>
-        <td bgcolor="#afafaf  ">
-          <table width="100%" border=0 cellspacing=1 cellpadding=5 style="font-size: 12px;">
-            <tr align="center" style="background-color: #eeeeee  ;">
-              <td width="10%">決定</td>
-              <td width="8%">写真</td>
-              <td width="47%">賞品名</td>
-              <td width="15%">ポイント</td>
-            </tr>
-<?php foreach ($item_list as $data) : ?>
-<?php $item = $data['Item']; ?>
-            <tr style="background-color: #ffffff  ;">
-              <td width="10%" align="center"><form action="#" method="post">
-                <input type="submit" class="btn btn-danger" name="decide" value="決定">
-                <input type="hidden" name="item_name" value="<?php echo $item['itemName'] ?>">
-                <input type="hidden" name="code" value="<?php echo $item['itemCode'] ?>">
-                <input type="hidden" name="image" value="<?php echo $item['mediumImageUrls'][0]['imageUrl'] ?>">
-                <input type="hidden" name="price" value="<?php echo $item['itemPrice'] ?>">
-                <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
-              </form></a></td>
-
-              <td width="8%" align="center"><a href="<?php echo $item['itemUrl']; ?>" target="_top"><img src="<?php echo $item['mediumImageUrls'][0]['imageUrl']; ?>" border=0></a></td>
-              <td width="47%" align="left" ><a href="<?php echo $item['itemUrl']; ?>" target="_top"><font size="-1"><?php echo $item['itemName']; ?></a></td>
-              <td width="15%" align="right" nowrap> <span style="font-size: 20px;color: red;"><?php echo number_format($item['itemPrice']); ?></span> P</td>
-            </tr>
-<?php endforeach; ?>
-          </table>
-        </td>
-      </tr>
-    </table>
-<?php endif; ?>
-</font>
+@if ($count > 0)
+<div class="quest-list container table-responsive">
+  <div class="panel panel-danger text-center">
+    <div class="panel-heading">
+      <h3>見つかった件数: {{number_format($count)}}件</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover text-center">
+        @foreach ($item_list as $data)
+        <?php $item = $data['Item']; ?>
+        <form action="#" method="POST">
+          <tr>
+            <td>
+              <button type="submit" class="btn btn-danger" name="diceide">決定</button>
+              <input type="hidden" name="item_name" value="{{$item['itemName']}}">
+              <input type="hidden" name="code" value="{{$item['itemCode']}}">
+              <input type="hidden" name="image" value="{{$item['mediumImageUrls'][0]['imageUrl']}}">
+              <input type="hidden" name="price" value="{{$item['itemPrice']}}">
+              <input type="hidden" name="_token" value="{{csrf_token()}}">
+            </td>
+            <td>
+              <a href="{{$item['itemUrl']}}" target="_top"><img src="{{$item['mediumImageUrls'][0]['imageUrl']}}" border=0></a>
+            </td>
+            <td>
+              <a href="{{$item['itemUrl']}}" target="_top"><font size="-1">{{$item['itemName']}}</a>
+            </td>
+            <td>
+              <span style="font-size: 20px;color: red;">{{number_format($item['itemPrice'])}} pt</span>
+            </td>
+          </tr>
+        </form>
+        @endforeach
+      </table>
+    </div>
+  </div>
+</div>
+@endif
 
 
-</body>
-</html>
+@endsection
