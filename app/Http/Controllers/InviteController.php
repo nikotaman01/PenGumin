@@ -14,6 +14,7 @@ class InviteController extends Controller
     protected $member;
 
     public function __construct(Member $member){
+        $this->middleware('auth');
         $this->member = $member;
     }
     public function index(){

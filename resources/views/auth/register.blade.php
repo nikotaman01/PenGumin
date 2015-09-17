@@ -4,6 +4,17 @@
 
 @section('body')
 子
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        入力に誤りがあります。<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<p>楽天新規登録</p>
 <form method="POST" action="/auth/register">
     {!! csrf_field() !!}
 
@@ -31,4 +42,6 @@
         <button type="submit">登録</button>
     </div>
 </form>
+<a href="/auth/register">ログイン</a>
+
 @stop

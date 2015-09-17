@@ -26,8 +26,10 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    protected $redirectPath = '/invite/index';
+    protected $redirectPath = '/mypage';
     protected $loginPath = '/auth/login';
+    protected $redirectTo = '/invite/index';
+    protected $redirectAfterLogout = "/auth/login";
     /**
      * Create a new authentication controller instance.
      *
@@ -61,7 +63,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Member::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
