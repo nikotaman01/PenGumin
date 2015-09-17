@@ -34,7 +34,13 @@ class MypageController extends Controller
         if ($currentItem != null) {
             $data['goodsPoint'] = $currentItem->price;
         }
-        $data['totalPoint'] = $member->getChild()->quests()->sum('point');
+
+        //$data['totalPoint'] = $member->quests()->whereNotNull('approved_at')->sum('point');
+        //$data['doneQuestList'] = $member->quests()->whereNotNull('approved_at')->whereNull('completed_at')->get();
+        $data['allQuestList'] = $member->quests()->get();
+        $data['gotGoodsList'] = $member->items()->whereNotNull('did_get')->get();
+        $data['pastQuestList'] = $member->quests()->whereNotNull('completed_at')->get();
+
         return view('mypage/index', $data);
     } 
 }
