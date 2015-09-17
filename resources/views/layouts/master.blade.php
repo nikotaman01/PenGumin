@@ -49,8 +49,11 @@
     <body>
       <div class="header">
         <h3>PenGumin           楽天クエスト</h3>
+        <form method="GET" action="{{action('MypageController@index')}}" accept-charset="UTF-8" class="mypage">
+          <button type="submit" class="btn btn-success">MyPage</button>
+        </form>
         <form method="GET" action="{{action('Auth\AuthController@getLogout')}}" accept-charset="UTF-8" class="logout">
-          <button type="submit" class="btn btn-info">logout</button>
+          <button type="submit" class="btn btn-info">Logout</button>
         </form>
       </div>
       <div class="main-picture">

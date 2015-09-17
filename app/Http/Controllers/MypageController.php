@@ -32,7 +32,8 @@ class MypageController extends Controller
             'doneQuestList' => ['name','point','quest_id'],
             'allQuestList' => ['name','point','quest_id'],
             'gotGoodsList' => ['picture','name','gotDate'],
-            'pastQuestList' => ['name','point','count']
+            'pastQuestList' => ['name','point','count'],
+            'goodsPicture' => $member->getCurrentItem()->picture
         ];
 
         $currentItem = $member->getCurrentItem();
@@ -47,7 +48,7 @@ class MypageController extends Controller
         $data['pastQuestList'] = $member->quests()->whereNotNull('completed_at')->get();
 
         return view('mypage/index', $data);
-    } 
+    }
 
     public function select()
     {
@@ -81,11 +82,13 @@ class MypageController extends Controller
 
     }
 
-    public function clear(Request $req,Quest $quest){
+    public function clear(Request $req, Quest $quest){
         //対象のクエストID
         $questId = $req->questId;
 
-        //DBから探す
-        dd($quest->find($questId));
+        $questRecord = $quest->where("quest_id","=",$questId)->first();
+        $questRecord->approved_at = date("Y/m/d H:i:s");
+        $questRecord->save();
+        return redirect()->action('MypageController@index');
     }
 }
