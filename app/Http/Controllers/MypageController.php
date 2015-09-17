@@ -7,24 +7,29 @@ use App\Http\Controllers\Controller;
 
 class MypageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $member = Auth::user();
 
-        $member = new \App\Member(); // TODO authentication required
-        $member->member_id = 2;
-        $member->parent_id = 1;
-        $member->point = 500;
-
         $data = [
             'isParent' => $member->isParent(),
             'gotPoint' => $member->getChild()->point,
-            'goodsPoint' => 720,
-            'totalPoint' => 100,
+            'goodsPoint' => null,
+            'totalPoint' => 0,
             'doneQuestList' => [],
             'allQuestList' => [],
-
         ];
-        return view('mypage/index',$data);
+
+        $currentItem = $member->getCurrentItem();
+        if ($currentItem != null) {
+            $data['goodsPoint'] = $currentItem->price;
+        }
+
+        return view('mypage/index', $data);
     } 
 }
