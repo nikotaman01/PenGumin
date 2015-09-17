@@ -11,18 +11,18 @@
 |
 */
 Route::get('/auth/form', "Auth\AuthController@form");
-// Route::get('/auth/login', "Auth\AuthController@login");
-// Route::post('/auth/login', "Auth\AuthController@postLogin");
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/invite/index', "InviteController@index");
 Route::post('/invite/email', "InviteController@email");
 Route::get('/invite/complete', "InviteController@complete");
 Route::get('/invite/register', "InviteController@register");
 
-Route::get('/mypage/index', "MypageController@show");
+Route::get('/mypage', "MypageController@index");
 
 Route::get('/mypage/select', 'SelectController@index');
 Route::post('/mypage/select', 'SelectController@store');

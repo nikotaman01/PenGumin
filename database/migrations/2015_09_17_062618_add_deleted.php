@@ -12,7 +12,7 @@ class AddDeleted extends Migration
      */
     public function up()
     {
-    Schema::(table'items',function($table){
+        Schema::table('items',function($table){
             $table->integer('price');
             $table->timestamp('did_get')->nullable()->default(NULL);
             $table->timestamp('did_approve')->nullable()->default(NULL);

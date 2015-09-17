@@ -1,5 +1,8 @@
 <?php
 
+
+$url = parse_url(getenv('DATABASE_URL'));
+
 return [
 
     /*
@@ -27,6 +30,8 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'pgsql'),
+    //'default' => env('DB_CONNECTION', 'mysql'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -65,14 +70,23 @@ return [
         ],
 
         'pgsql' => [
-            'driver'   => 'pgsql',
-            'host'     => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset'  => 'utf8',
-            'prefix'   => '',
-            'schema'   => 'public',
+            // 'driver' => 'pgsql',
+            // 'host' => $url['host'],
+            // 'database' =>  substr($url['path'], 1),
+            // 'username' => $url['user'],
+            // 'password' => $url['pass'],
+            // 'charset' => 'utf8',
+            // 'prefix' => '',
+            // 'schema' => 'public',
+            'driver'    => 'pgsql',
+            'host'      => env('DB_HOST', 'localhost'),
+            'database'  => env('DB_DATABASE', 'forge'),
+            'username'  => env('DB_USERNAME', 'forge'),
+            'password'  => env('DB_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
         ],
 
         'sqlsrv' => [
