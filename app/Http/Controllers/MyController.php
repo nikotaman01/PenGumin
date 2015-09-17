@@ -4,6 +4,6 @@ use Illuminate\Routing\Controller as BaseController;
 
 class MyController extends BaseController {
     function show(){
-        return view('mypage');
+        return view('mypage/index');
     }
 }

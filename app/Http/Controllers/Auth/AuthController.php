@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Member;
 use Validator;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+    // protected $loginPath ="/mypage/index";
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -23,6 +26,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $redirectPath = '/invite/index';
+    protected $loginPath = '/auth/login';
     /**
      * Create a new authentication controller instance.
      *
@@ -62,4 +67,17 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function form(Request $req){
+        return view("auth/form")->with('data',$req->all());
+    }
+
+    // public function rakuten_register(Request $req){
+    //     //楽天登録処理
+    // }
+
+    // public function login(){
+    //     $this->getLogin();
+    //     return view("auth/login");
+    // }
 }

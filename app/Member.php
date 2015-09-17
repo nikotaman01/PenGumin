@@ -8,6 +8,7 @@ class Member extends Model
 {
 	protected $table = 'members';
 	protected $primaryKey = 'member_id';
+    protected $fillable = ['name','email','parent_id','point'];
 
 	public function isParent()
 	{
