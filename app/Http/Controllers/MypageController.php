@@ -43,4 +43,11 @@ class MypageController extends Controller
 
         return view('mypage/index', $data);
     } 
+
+    public function select()
+    {
+        print "hoge";
+
+        return view('select/index');
+    }
 }
