@@ -22,7 +22,7 @@ class MypageController extends Controller
     {
         $member = Auth::user();
         if ($member->isParent() && $member->getChild() === null) {
-
+            return redirect()->to('/auth/logout');
         }
 
         $data = [
@@ -35,11 +35,12 @@ class MypageController extends Controller
             'gotGoodsList' => ['picture','name','gotDate'],
             'pastQuestList' => ['name','point','count'],
             'firstGet'  =>  Session::get('getFlag')? Session::get('getFlag'):false,
-            'goodsPicture' => $member->getCurrentItem()->picture
         ];
         $currentItem = $member->getCurrentItem();
         if ($currentItem != null) {
             $data['goodsPoint'] = $currentItem->price;
+            $data['goodsPicture'] = $member->getCurrentItem()->picture;
+
         }
 
         $data['totalPoint'] = $member->quests()->whereNotNull('approved_at')->sum('point');
