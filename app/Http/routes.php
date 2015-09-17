@@ -12,8 +12,18 @@
 */
 
 Route::get('/', "TopController@index");
+
+Route::get('/mypage/select', 'SelectController@index');
+Route::post('/mypage/select', 'SelectController@store');
+
 Route::get('/mypage', "MyController@show");
 Route::get('/invite/index', "InviteController@index");
+Route::post('/invite/email', "InviteController@email");
+Route::get('/invite/complete', "InviteController@complete");
+Route::get('/invite/register', "InviteController@register");
+Route::get('/auth/form', "Auth\AuthController@form");
+Route::get('/auth/login', "Auth\AuthController@login");
 
 
-#Route::controllers();
+
+
