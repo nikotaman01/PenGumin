@@ -23,6 +23,17 @@
 		</div>
 	</div>
 </div> -->
+@if (count($errors) > 0)
+	<div class="alert alert-danger">
+		入力に誤りがあります。<br><br>
+		<ul>
+			@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach
+		</ul>
+	</div>
+@endif
+<p>楽天ログイン</p>
 <form method="POST" action="/auth/login">
     {!! csrf_field() !!}
 
@@ -44,4 +55,5 @@
         <button type="submit">ログイン</button>
     </div>
 </form>
+<a href="/auth/register">新規登録</a>
 @stop

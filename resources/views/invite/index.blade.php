@@ -45,6 +45,7 @@
 				</div>
 			</div>
 		</div>
+		<a href="/auth/logout">ログアウト</a>
 	</div>
 </div>
 @stop
