@@ -35,7 +35,7 @@ class Member extends Model implements AuthenticatableContract,
 		}else{
 			return $this;
 		}
-	}	
+	}
 
 	public function getCurrentItem()
 	{
@@ -58,7 +58,22 @@ class Member extends Model implements AuthenticatableContract,
 	}
 
 	public function quests()
-	{	
-		return $this->hasMany('App\Quest');
+	{
+		if ($this->parent_id == null) {
+			return $this->assigningQuests();
+		} else {
+			return $this->assignedQuests();
+		}
 	}
+
+	public function assigningQuests()
+	{	
+		return $this->hasMany('App\Quest', 'assigning_member_id');
+	}
+
+	public function assignedQuests()
+	{	
+		return $this->hasMany('App\Quest', 'assigned_member_id');
+	}
+
 }
