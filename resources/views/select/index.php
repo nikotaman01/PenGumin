@@ -26,12 +26,12 @@ if ($indata) {
     $word = $indata['word'];
     $kword = $word['keyword'];
 
-//     $keys = array_keys($data);
+//      $keys = array_keys($data);
 //
-// // 配列数分ループして、キーを取り出して表示する。
-// Foreach ($keys as $key) {
-//     print $key;
-// }
+//  // 配列数分ループして、キーを取り出して表示する。
+//  Foreach ($keys as $key) {
+//      print $key . "\n";
+//  }
 }
 
 
@@ -93,13 +93,15 @@ if ($indata) {
             <tr style="background-color: #ffffff  ;">
               <td width="10%" align="center"><form action="#" method="post">
                 <input type="submit" class="btn btn-danger" name="decide" value="決定">
-                <input type="hidden" name="ddata" value="<?php $item ?>">
+                <input type="hidden" name="item_name" value="<?php echo $item['itemName'] ?>">
+                <input type="hidden" name="picure" value="<?php echo $item['mediumImageUrls'] ?>">
+                <input type="hidden" name="price" value="<?php echo $item['itemPrice'] ?>">
                 <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
               </form></a></td>
 
-              <td width="8%" align="center"><a href="<?php echo $item['itemUrl']; ?>" target="_top"><img src="<?php echo $item['smallImageUrls'][0]['imageUrl']; ?>" border=0></a></td>
-              <td width="47%" align="left"><a href="<?php echo $item['itemUrl']; ?>" target="_top"><font size="-1"><?php echo $item['itemName']; ?></a></td>
-              <td width="15%" align="right" nowrap> <?php echo number_format($item['itemPrice']); ?> P</td>
+              <td width="8%" align="center"><a href="<?php echo $item['itemUrl']; ?>" target="_top"><img src="<?php echo $item['mediumImageUrls'][0]['imageUrl']; ?>" border=0></a></td>
+              <td width="47%" align="left" ><a href="<?php echo $item['itemUrl']; ?>" target="_top"><font size="-1"><?php echo $item['itemName']; ?></a></td>
+              <td width="15%" align="right" nowrap> <span style="font-size: 20px;color: red;"><?php echo number_format($item['itemPrice']); ?></span> P</td>
             </tr>
 <?php endforeach; ?>
           </table>
