@@ -27,5 +27,10 @@ Route::get('/mypage', "MypageController@index");
 Route::get('/mypage/select', 'SelectController@index');
 Route::post('/mypage/select', 'SelectController@store');
 
-Route::post('/mypage/clear', 'MypageController@clear');
+Route::post('/mypage/accept/{id}', 'MypageController@accept');
+Route::post('/mypage/clear/{id}', 'MypageController@clear');
 Route::post('/mypage/done', "MypageController@done");
+
+Route::get('/mypage/cancel', "MypageController@cancel");
+Route::get('/mypage/cart', "MypageController@cart");
+

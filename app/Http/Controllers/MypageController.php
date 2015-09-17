@@ -9,6 +9,7 @@ use App\Member;
 use App\Quest;
 use Session;
 use App\Item;
+use DB;
 
 class MypageController extends Controller
 {
@@ -33,16 +34,16 @@ class MypageController extends Controller
             'allQuestList' => ['name','point','quest_id'],
             'gotGoodsList' => ['picture','name','gotDate'],
             'pastQuestList' => ['name','point','count'],
+            'firstGet'  =>  Session::get('getFlag')? Session::get('getFlag'):false,
             'goodsPicture' => $member->getCurrentItem()->picture
         ];
-
         $currentItem = $member->getCurrentItem();
         if ($currentItem != null) {
             $data['goodsPoint'] = $currentItem->price;
         }
 
-        //$data['totalPoint'] = $member->quests()->whereNotNull('approved_at')->sum('point');
-        //$data['doneQuestList'] = $member->quests()->whereNotNull('approved_at')->whereNull('completed_at')->get();
+        $data['totalPoint'] = $member->quests()->whereNotNull('approved_at')->sum('point');
+        $data['doneQuestList'] = $member->quests()->whereNotNull('approved_at')->whereNull('completed_at')->get();
         $data['allQuestList'] = $member->quests()->get();
         $data['gotGoodsList'] = $member->items()->whereNotNull('did_get')->get();
         $data['pastQuestList'] = $member->quests()->whereNotNull('completed_at')->get();
@@ -52,27 +53,28 @@ class MypageController extends Controller
 
     public function select()
     {
-        print "hoge";
-
         return view('select/index');
     }
 
+    public function cancel()
+    {
+        $member = Auth::user();
+        $id = $member->getChild()->member_id;
+        DB::delete('delete from items where member_id = ?', [$id]);
+        return redirect()->action('MypageController@index');
+    }
+
     public function done(Item $item){
-        // $login_user = Auth::user();
-        // $child = $login_user->getChild();
+        $login_user = Auth::user();
+        $child = $login_user->getChild();
 
-        // $child_member_id = $child->member_id;
+        $child_member_id = $child->member_id;
 
-        // $item_record = $item->where("member_id","=",$child_member_id)->where('did_get','=',"")->first();
-        // dd($item_record);
+        $item_record = $item->where("member_id","=",$child_member_id)->where('did_get','=',NULL)->first();
+        $item_record->did_get = date("Y/m/d H:i:s");
+        $item_record->save();
 
-        // // $item->where()
-
-        // //買うのは親
-        // $member = $req->user();
-        // //ダミーでセッションに登録
-        // Session::put('rakuten_point', 4000);
-
+        return redirect()->to('/mypage/cart');
 
     }
 
@@ -83,6 +85,22 @@ class MypageController extends Controller
         $questRecord = $quest->where("quest_id","=",$questId)->first();
         $questRecord->approved_at = date("Y/m/d H:i:s");
         $questRecord->save();
+
+        Session::put("getFlag",true);
         return redirect()->action('MypageController@index');
+    }
+
+    public function accept(Request $req, Quest $quest){
+        //対象のクエストID
+        $questId = $req->questId;
+
+        $questRecord = $quest->where("quest_id","=",$questId)->first();
+        $questRecord->completed_at = date("Y/m/d H:i:s");
+        $questRecord->save();
+        return redirect()->action('MypageController@index');
+    }
+
+    public function cart(){
+        return view('mypage/cart');
     }
 }

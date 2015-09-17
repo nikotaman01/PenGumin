@@ -8,7 +8,7 @@ $didAccept = true;
 //$gotPoint = 6191;
 //$goodsPoint = 1000;
 $totalPoint = 7000;
-$firstGet = false;
+
 //$goodsPicture = "https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg";
 $gotGoodsList = array(
   array(
@@ -70,7 +70,7 @@ $allQuestList = array(
         <div class="goods-picture img-thumbnail">
           <img src="{{$goodsPicture}}" class="img-responsive" alt="goods-picture">
         </div>
-        <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
+        <form method="GET" action="{{action('MypageController@cancel')}}" accept-charset="UTF-8">
           <div class="accept-goods">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-warning">却下</button>
@@ -165,9 +165,10 @@ $allQuestList = array(
             <td>
               <h4>{{$quest['point']}} クエストpt</h4>
             </td>
-            <form method="POST" action="{{action('MypageController@index', $quest['quest_id'])}}" accept-charset="UTF-8">
+            <form method="POST" action="{{action('MypageController@accept')}}" accept-charset="UTF-8">
               <td>
                 {!! csrf_field() !!}
+                <input type = "hidden" value = "{{$quest ['quest_id']}}" name = "questId">
                 <button type="submit" class="btn btn-danger">承認</button>
               </td>
             </form>
