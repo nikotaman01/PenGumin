@@ -3,7 +3,6 @@
 @section('title', '楽天クエストに新規登録')
 
 @section('body')
-親
 <div class="container">
 	<div class="jumbotron">
 	  <h1>楽天クエスト登録で<br><span style="color:red;">2000ポイント</span>プレゼント！</h1>
