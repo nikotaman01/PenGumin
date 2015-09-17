@@ -61,11 +61,10 @@ if(isset($indata)){
               <td>ほしい賞品</td>
               <td>
 
-                <input type="text" class="form-control input" placeholder="Default input" name="keyword" value="<?php isset($kword)? $kword:''  ?>" size="30">
+                <input type="text" class="form-control input" placeholder="Default input" name="keyword" value="{{ Input::get('keyword')}}" size="30">
               </td>
              <td>
-                <input type="submit" class="btn btn-danger" name="submit" value="賞品を調べる">
-                <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+                <input type="submit" class="btn btn-danger" value="賞品を調べる">
              </td>
             </tr>
           </table>
@@ -94,6 +93,7 @@ if(isset($indata)){
               <td width="10%" align="center"><form action="#" method="post">
                 <input type="submit" class="btn btn-danger" name="decide" value="決定">
                 <input type="hidden" name="item_name" value="<?php echo $item['itemName'] ?>">
+                <input type="hidden" name="code" value="<?php echo $item['itemCode'] ?>">
                 <input type="hidden" name="image" value="<?php echo $item['mediumImageUrls'][0]['imageUrl'] ?>">
                 <input type="hidden" name="price" value="<?php echo $item['itemPrice'] ?>">
                 <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">

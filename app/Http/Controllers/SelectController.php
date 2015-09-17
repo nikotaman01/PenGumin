@@ -8,14 +8,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use DB;
+use Auth;
 
 class SelectController extends Controller
 {
     function __construct(){
         define("APP_ID","1082596731103067333");
+        $this->middleware('auth');
 
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -87,11 +88,23 @@ class SelectController extends Controller
      */
     public function store(Request $request)
     {
+
+        $member = Auth::user();
         if ($request['item_name']){
-            // print $request['item_name'];
-            // print $request['price'];
-            // print $request['image'];
-            // $results = DB::select('select * from users');
+            //user_idを引き取る
+            $id = $member->member_id;
+
+            //user_idの賞品選択済を確認
+            $results = DB::select('select created_at from items where member_id = ?', [$id]);
+            var_dump($results);
+
+            if(empty($results)){
+                //新規ならレコードの追加
+                DB::insert('insert into items (member_id, product_id, name, created_at, updated_at, price) values (?, ?, ?, ?, ?, ?)', [$id, $request['code'], $request['item_name'], date('Y-m-d'), date('Y-m-d'), $request['price'] ]);
+            }else{
+                //存在するなら賞品を更新する
+                DB::update('update items set product_id = ?, name = ?, updated_at = ?, price = ?  where member_id = ?', [$id, $request['item_name'], date('Y-m-d'), $request['price'], $id]);
+            }
         }
         return view('/mypage/index');
     }

@@ -165,7 +165,6 @@ $allQuestList = array(
           @endforeach
         </table>
       </div>
-      <form method="POST" action="{{action('MypageController@show')}}" accept-charset="UTF-8">
       <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
         <div class="quest-edit panel-footer text-center">
           {!! csrf_field() !!}
