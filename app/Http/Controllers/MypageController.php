@@ -83,5 +83,6 @@ class MypageController extends Controller
         $questRecord = $quest->where("quest_id","=",$questId)->first();
         $questRecord->approved_at = date("Y/m/d H:i:s");
         $questRecord->save();
+        return redirect()->action('MypageController@index');
     }
 }
