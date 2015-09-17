@@ -9,7 +9,7 @@ $didAccept = true;
 //$goodsPoint = 1000;
 $totalPoint = 7000;
 $firstGet = false;
-$goodsPicture = "https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg";
+//$goodsPicture = "https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg";
 $gotGoodsList = array(
   array(
     'picture' => 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg',
