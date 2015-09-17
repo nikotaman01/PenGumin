@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnnouncesTable extends Migration
+class AddCompletedAt extends Migration
 {
     /**
      * Run the migrations.
