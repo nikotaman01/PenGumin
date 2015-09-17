@@ -66,7 +66,7 @@ $allQuestList = array(
     <h2>達成度</h2>
     <div class="achievement-graph row">
       <div class="goods col-md-3">
-        @if ($goodsPoint == null)
+        @if ($goodsPoint !== null)
         <div class="goods-picture img-thumbnail">
           <img src="{{$goodsPicture}}" class="img-responsive" alt="goods-picture">
         </div>
@@ -75,14 +75,6 @@ $allQuestList = array(
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-warning">賞品選び直し</button>
           </div>
-        </form>
-        @else
-        <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
-          <div class="accept-goods">
-            {!! csrf_field() !!}
-            <button type="submit" class="btn btn-success">賞品承認</button>
-          </div>
-        </form>
         @endif
       </div>
       <div class="progressbar col-md-8">
@@ -222,8 +214,8 @@ $allQuestList = array(
     @else
     <div class="achievement-graph row">
       <div class="goods col-md-3">
-        <div class="goods-pic img-thumbnail">
-          <img src="{{$goodsPicture}}" class="img-responsive" alt="gumi">
+        <div class="goods-picture img-thumbnail">
+          <img src="{{$goodsPicture}}" class="img-responsive" alt="goods-picture">
         </div>
         <form method="GET" action="{{action('SelectController@index')}}" accept-charset="UTF-8">
           <div class="change-goods">
