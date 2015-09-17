@@ -22,7 +22,7 @@ Route::post('/invite/email', "InviteController@email");
 Route::get('/invite/complete', "InviteController@complete");
 Route::get('/invite/register', "InviteController@register");
 
-Route::get('/mypage/index', "MyController@show");
+Route::get('/mypage', "MypageController@index");
 
 Route::get('/mypage/select', 'SelectController@index');
 Route::post('/mypage/select', 'SelectController@store');
