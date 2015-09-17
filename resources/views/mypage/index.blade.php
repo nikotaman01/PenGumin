@@ -8,50 +8,51 @@ $didAccept = true;
 //$gotPoint = 6191;
 //$goodsPoint = 1000;
 $totalPoint = 7000;
+$firstGet = false;
 $gotGoodsList = array(
   array(
     'picture' => 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Haribo-goldbaeren-2007.jpg',
     'name' => 'Haribo 6人衆',
-    'gotDate' => '2015/09/16'
+    'did_get' => '2015/09/16'
   )
 );
 $pastQuestList = array(
   array(
-    'name' => 'さんぽ',
+    'title' => 'さんぽ',
     'point' => '2',
     'count' => '3'
   ),
   array(
-      'name' => 'かたたたき',
+      'title' => 'かたたたき',
       'point' => '1',
       'count' => '132'
   )
 );
 $doneQuestList = array(
   array(
-    'name' => '親孝行',
+    'title' => '親孝行',
     'point' => '9999',
     'quest_id' => '1'
   ),
   array(
-      'name' => 'かたたたき',
+      'title' => 'かたたたき',
       'point' => '1',
       'quest_id' => '2'
   )
 );
 $allQuestList = array(
   array(
-    'name' => '親孝行',
+    'title' => '親孝行',
     'point' => '9999',
     'quest_id' => '1'
   ),
   array(
-      'name' => 'かたたたき',
+      'title' => 'かたたたき',
       'point' => '1',
       'quest_id' => '2'
   ),
   array(
-      'name' => '排水口のぬめり取り',
+      'title' => '排水口のぬめり取り',
       'point' => '3',
       'quest_id' => '3'
   )
@@ -114,7 +115,7 @@ $allQuestList = array(
               <h6>賞品の必要ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$goodsPoint}} pt</h4>
+              <h4>{{$goodsPoint}} クエストpt</h4>
             </div>
           </div>
           <div class="got-point panel panel-info col-md-3">
@@ -122,7 +123,7 @@ $allQuestList = array(
               <h6>現在の獲得ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$gotPoint}} pt</h4>
+              <h4>{{$gotPoint}} クエストpt</h4>
             </div>
           </div>
           <div class="remaining-point panel panel-danger col-md-3">
@@ -131,13 +132,22 @@ $allQuestList = array(
             </div>
             <div class="panel-body">
               <?php $remainingPoint = $goodsPoint - $gotPoint; ?>
-              <h4>{{$remainingPoint}} pt</h4>
+              <h4>{{$remainingPoint}} クエストpt</h4>
             </div>
           </div>
         </div>
+        @if ($firstGet)
+        <div class="rakuten-point col-md-3 col-md-offset-5">
+          <h4>あなたがお持ちの楽天ポイント<br>現在: 5000 pt</h4>
+        </div>
+        @else
+        <div class="rakuten-point col-md-3 col-md-offset-5">
+          <h4>あなたがお持ちの楽天ポイント<br>現在: 1000 pt</h4>
+        </div>
+        @endif
         @if ($percent >= 100)
         <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
-          <div class="buy col-md-3 col-md-offset-9">
+          <div class="buy col-md-3">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-danger btn-lg">購入</button>
           </div>
@@ -158,10 +168,10 @@ $allQuestList = array(
           @foreach ($doneQuestList as $quest)
           <tr>
             <td>
-              <h4>{{$quest['name']}}</h4>
+              <h4>{{$quest['title']}}</h4>
             </td>
             <td>
-              <h4>{{$quest['point']}} pt</h4>
+              <h4>{{$quest['point']}} クエストpt</h4>
             </td>
             <form method="POST" action="{{action('MypageController@index', $quest['quest_id'])}}" accept-charset="UTF-8">
               <td>
@@ -206,7 +216,7 @@ $allQuestList = array(
         <h3>現在の獲得ポイント</h3>
       </div>
       <div class="panel-body">
-        <h4>{{$gotPoint}} pt</h4>
+        <h4>{{$gotPoint}} クエストpt</h4>
       </div>
     </div>
     @else
@@ -244,7 +254,7 @@ $allQuestList = array(
               <h6>賞品の必要ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$goodsPoint}} pt</h4>
+              <h4>{{$goodsPoint}} クエストpt</h4>
             </div>
           </div>
           <div class="got-point panel panel-info col-md-3">
@@ -252,7 +262,7 @@ $allQuestList = array(
               <h6>現在の獲得ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$gotPoint}} pt</h4>
+              <h4>{{$gotPoint}} クエストpt</h4>
             </div>
           </div>
           <div class="remaining-point panel panel-danger col-md-3">
@@ -261,7 +271,7 @@ $allQuestList = array(
             </div>
             <div class="panel-body">
               <?php $remainingPoint = $goodsPoint - $gotPoint; ?>
-              <h4>{{$remainingPoint}} pt</h4>
+              <h4>{{$remainingPoint}} クエストpt</h4>
             </div>
           </div>
         </div>
@@ -281,12 +291,12 @@ $allQuestList = array(
           @foreach ($allQuestList as $quest)
           <tr>
             <td>
-              <h4>{{$quest['name']}}</h4>
+              <h4>{{$quest['title']}}</h4>
             </td>
             <td>
-              <h4>{{$quest['point']}} pt</h4>
+              <h4>{{$quest['point']}} クエストpt</h4>
             </td>
-            <form method="POST" action="{{action('MypageController@index', $quest['quest_id'])}}" accept-charset="UTF-8">
+            <form method="POST" action="{{action('MypageController@clear', $quest['quest_id'])}}" accept-charset="UTF-8">
               <td>
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-danger">おわった！</button>
@@ -302,7 +312,7 @@ $allQuestList = array(
   <div class="history container">
     <h2>あしあと</h2>
     <div class="total-point panel panel-dengar">
-      <h3>今までの総獲得ポイント: {{$totalPoint}} pt</h3>
+      <h3>今までの総獲得ポイント: {{$totalPoint}} クエストpt</h3>
     </div>
     <br>
     <div class="got-goods">
@@ -313,8 +323,8 @@ $allQuestList = array(
         <div class="goods-name">
           <h4>{{$goods['name']}}</h4>
         </div>
-        <div class="got-date">
-          <h4>{{$goods['gotDate']}}</h4>
+        <div class="did-get">
+          <h4>{{$goods['did_get']}}</h4>
         </div>
       </div>
       @endforeach
@@ -326,13 +336,13 @@ $allQuestList = array(
           @foreach ($pastQuestList as $quest)
           <tr>
             <td>
-              <h4>{{$quest['name']}}</h4>
+              <h4>{{$quest['title']}}</h4>
             </td>
             <td>
               <span class="badge"><h4>{{$quest['count']}} 回</h4></span>
             </td>
             <td class="panel panel-info">
-              <h4>計 {{$quest['count'] * $quest['point']}} pt</h4>
+              <h4>計 {{$quest['count'] * $quest['point']}} クエストpt</h4>
             </td>
           </tr>
           @endforeach
