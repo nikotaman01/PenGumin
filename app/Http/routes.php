@@ -12,5 +12,6 @@
 */
 
 Route::get('/', "TopController@index");
-
+Route::get('/mypage/select', 'SelectController@index');
+Route::post('/mypage/select', 'SelectController@store');
 #Route::controllers();
