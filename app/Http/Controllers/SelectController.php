@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DB;
 
 class SelectController extends Controller
 {
@@ -86,15 +87,20 @@ class SelectController extends Controller
      */
     public function store(Request $request)
     {
+        var_dump($request['ddata']);
 
         if ($request['ddata']){
 
             $itemData = $request['ddata'];
             var_dump($itemData);
+
+            $results = DB::select('select * from items');
+            var_dump($results);
+
         }
         // reqはitem型
         // item型の必要な値をデータベースに登録
-        return view('select/index');
+        return view('/mypage');
     }
 
     /**
