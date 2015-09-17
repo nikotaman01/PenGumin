@@ -70,7 +70,7 @@ $allQuestList = array(
         <div class="goods-picture img-thumbnail">
           <img src="{{$goodsPicture}}" class="img-responsive" alt="goods-picture">
         </div>
-        <form method="POST" action="{{action('MypageController@index')}}" accept-charset="UTF-8">
+        <form method="GET" action="{{action('MypageController@cancel')}}" accept-charset="UTF-8">
           <div class="accept-goods">
             {!! csrf_field() !!}
             <button type="submit" class="btn btn-warning">賞品選び直し</button>

@@ -9,6 +9,7 @@ use App\Member;
 use App\Quest;
 use Session;
 use App\Item;
+use DB;
 
 class MypageController extends Controller
 {
@@ -52,9 +53,15 @@ class MypageController extends Controller
 
     public function select()
     {
-        print "hoge";
-
         return view('select/index');
+    }
+
+    public function cancel()
+    {
+        $member = Auth::user();
+        $id = $member->getChild()->member_id;
+        DB::delete('delete from items where member_id = ?', [$id]);
+        return redirect()->action('MypageController@index');
     }
 
     public function done(Item $item){
