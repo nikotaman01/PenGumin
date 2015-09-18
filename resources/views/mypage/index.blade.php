@@ -73,7 +73,7 @@ $allQuestList = array(
         <form method="GET" action="{{action('MypageController@cancel')}}" accept-charset="UTF-8">
           <div class="accept-goods">
             {!! csrf_field() !!}
-            <button type="submit" class="btn btn-warning">賞品選び直し</button>
+            <button type="submit" class="btn btn-warning">却下</button>
           </div>
         @endif
       </div>
@@ -99,7 +99,7 @@ $allQuestList = array(
               @if ($goodsPoint == null)
               <h4>--- %</h4>
               @else
-              <h4>{{$percent}} %</h4>
+              <h5>{{$percent}} %</h5>
               @endif
             </div>
           </div>
@@ -108,7 +108,7 @@ $allQuestList = array(
               <h6>賞品の必要ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$goodsPoint}} クエストpt</h4>
+              <h5>{{$goodsPoint}} クエストpt</h5>
             </div>
           </div>
           <div class="got-point panel panel-info col-md-2">
@@ -116,7 +116,7 @@ $allQuestList = array(
               <h6>現在の獲得ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$gotPoint}} クエストpt</h4>
+              <h5>{{$gotPoint}} クエストpt</h5>
             </div>
           </div>
           <div class="remaining-point panel panel-danger col-md-2">
@@ -125,7 +125,7 @@ $allQuestList = array(
             </div>
             <div class="panel-body">
               <?php $remainingPoint = $goodsPoint - $gotPoint; ?>
-              <h4>{{$remainingPoint}} クエストpt</h4>
+              <h5>{{$remainingPoint}} クエストpt</h5>
             </div>
           </div>
         </div>
@@ -239,7 +239,7 @@ $allQuestList = array(
               <h6>現在のステータス</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$percent}} %</h4>
+              <h5>{{$percent}} %</h5>
             </div>
           </div>
           <div class="goods-point panel panel-success col-md-2">
@@ -247,7 +247,7 @@ $allQuestList = array(
               <h6>賞品の必要ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$goodsPoint}} クエストpt</h4>
+              <h5>{{$goodsPoint}} クエストpt</h5>
             </div>
           </div>
           <div class="got-point panel panel-info col-md-2">
@@ -255,7 +255,7 @@ $allQuestList = array(
               <h6>現在の獲得ポイント</h6>
             </div>
             <div class="panel-body">
-              <h4>{{$gotPoint}} クエストpt</h4>
+              <h5>{{$gotPoint}} クエストpt</h5>
             </div>
           </div>
           <div class="remaining-point panel panel-danger col-md-2">
@@ -264,7 +264,7 @@ $allQuestList = array(
             </div>
             <div class="panel-body">
               <?php $remainingPoint = $goodsPoint - $gotPoint; ?>
-              <h4>{{$remainingPoint}} クエストpt</h4>
+              <h5>{{$remainingPoint}} クエストpt</h5>
             </div>
           </div>
         </div>
