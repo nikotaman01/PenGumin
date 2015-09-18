@@ -22,7 +22,7 @@ class MypageController extends Controller
     {
         $member = Auth::user();
         if ($member->isParent() && $member->getChild() === null) {
-            return redirect()->to('/auth/logout');
+            return redirect()->to('/invite/index');
         }
 
         $data = [
